@@ -1,0 +1,35 @@
+page {
+  background: #f6f6f6;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width:100%;
+  height:100%;
+}
+
+.container{
+  text-align: center;
+  /* border: 1px black solid; */
+ 
+}
+
+.userinfo{
+  margin: auto;
+  /* border: 1px black solid; */
+ 
+}
+.userinfo image{
+width: 130px;
+height: 130px;
+margin: 50px auto;
+border-radius: 65px;
+}
+
+
+
+.userinfo-nickname{
+  margin-top: 20px;
+  text-align: center;
+  /* border: 1px black solid; */
+  margin: auto
+}

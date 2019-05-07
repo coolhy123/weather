@@ -1,0 +1,46 @@
+
+<view class="navbar"> 
+
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text> 
+
+</view>
+
+
+<view class='lunbo'>
+<swiper class='lunbo_img' autoplay='true' indicator-dots='true' interval='3000'>
+<view wx:for="{{imgUrl}}" wx:for-item="img" >
+<swiper-item ><image src="{{img}}"></image></swiper-item>
+</view>
+  
+
+</swiper>
+
+<view>
+  <view  class='locale'>
+     <view class="hotcity-common" style="display:inline;">当前位置: </view>
+     <view class="thisCityName" style="display:inline;">{{city}}{{district}}</view>
+     <view class="thisCityName" bindtap="jump" style="display:inline;">
+         <icon type="download" size="18" color='#2a579a' class='changeCity'/>
+         <text>更改定位</text>  
+     </view>
+    <view class="weatherwrap" bindtap='gotoWeather'>
+    <!--显示当天的天气信息-->
+    <view class="info">
+      <!--城市名称 当前日期-->
+      <view class="city">{{location}} ({{today}})</view>
+      <!--当天温度-->
+      <view class="temp">{{tmp}}℃</view>
+      <!--其他描述-->
+      <view class="weather">
+        <view>{{txt}}</view>
+        <view>{{dir}}</view>
+        <view>{{sc}}</view>
+        <view>PM2.5: {{pm25}}</view>
+        <view>{{qlty}}</view>
+      </view>
+      <view class="life" style='text-indent:1em;'>{{trav}}</view>
+    </view>
+  </view>
+  </view>
+</view>
+</view>

@@ -1,0 +1,22 @@
+<view>
+<view class='inTheaters'>
+ <text>正在热映</text>
+    <view>
+      <image></image>  
+    </view>
+</view>
+   
+<view class='comingSoon'>
+ <text>正在热映</text>
+    <view>
+      <image></image>
+    </view>
+</view>
+
+<view class='top250'>
+ <text>正在热映</text>
+    <view>
+      <image></image>
+    </view>
+</view>
+</view>
