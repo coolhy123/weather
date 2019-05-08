@@ -33,3 +33,7 @@ border-radius: 65px;
   /* border: 1px black solid; */
   margin: auto
 }
+
+.userinfo-welcome{
+  margin-top: 20px;
+}

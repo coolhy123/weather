@@ -34,7 +34,12 @@ Page({
     this.setData({
       today: app.globalData.day
 
-    });
+    }),
+      setTimeout(function () {
+       wx.navigateTo({
+         url:"../manager/manager",
+       })
+      }, 1500);
    
   },
 

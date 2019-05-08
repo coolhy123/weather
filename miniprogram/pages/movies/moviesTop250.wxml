@@ -1,0 +1,28 @@
+<view class="navbar"> 
+
+  <text wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="unique" bindtap="navbarTap">{{item}}</text> 
+
+</view>
+
+<view>
+<view class='inTheaters'>
+
+    <view wx:for="{{movies}}" wx:for-item="item" class='movies' bindtap='moviesMessage(item.movieId)'>
+    <text class='movies_id'>{{item.movieId}}\n</text>  
+      <view  class='movies_img'>
+      
+         <image src="{{item.coverageUrl}}" ></image>  
+      </view>
+      <view  class='movies_content'>
+      
+        <text class='movies_title'>{{item.title}}\n</text>  
+        <text class='movies_title'  >评分：{{item.average}}\n</text> 
+        <text class='movies_title'  >观看次数：{{item.count}}次\n</text> 
+        类型：<text class='movies_txt'  wx:for="{{item.genres}}" wx:for-index="idx" wx:for-item="act">{{act}}  <text wx:if="{{idx==(item.genres.length-1)}}">\n</text></text>
+      </view>
+      
+    </view>
+</view>
+</view>
+
+

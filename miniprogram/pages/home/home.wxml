@@ -6,5 +6,6 @@
      
     </block>
   </view>
-  <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  <text class="userinfo-nickname">{{userInfo.nickName}}\n</text>
+   <text class="userinfo-welcome">欢迎使用益生活小程序</text>
 </view>

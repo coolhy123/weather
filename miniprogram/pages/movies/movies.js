@@ -6,17 +6,21 @@ Page({
    * 页面的初始数据
    */
   data: {
-    city: app.globalData.defaultCity
+    city: app.globalData.defaultCity,
+    navbar: ['正在热映', '即将上映', '评分最高', '更多>>'],
+    currentTab: 0,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(city)
-    var inTheatersUrl = 'https://api.douban.com/v2/movie/in_theaters?start=0&count=6'   //豆瓣即将上映得电影
-    var comingSoonUrl = 'https://douban.uieee.com/v2/movie/coming_soon?start=0&count=6'  //豆瓣正在热映得电影
-    var top250Url = 'https://douban.uieee.com/v2/movie/top250?start=0&count=6'   //豆瓣电影top250
+    var  vm= this
+    vm.city = app.globalData.defaultCity
+    console.log(vm.city)
+    var inTheatersUrl = 'https://douban.uieee.com/v2/movie/in_theaters?city='+vm.city+'start=0&count=6'   //豆瓣即将上映得电影
+    var comingSoonUrl = 'https://douban.uieee.com/v2/movie/coming_soon?' + vm.city +'start=0&count=6'  //豆瓣正在热映得电影
+    var top250Url = 'https://douban.uieee.com/v2/movie/top250?' + vm.city +'start=0&count=6'   //豆瓣电影top250
 
     this.getMovies(inTheatersUrl,"inTheaters", "正在热映")
   },
@@ -100,5 +104,72 @@ Page({
 
  },
 
-  processDoubanData: function (moviseData, settedKey, categoryTitle){}
+  processDoubanData: function (moviseData, settedKey, categoryTitle){
+  var vm=this
+    var movies=[];
+    for (var idx in moviseData.subjects){
+      var subject = moviseData.subjects[idx];
+      var title = subject.title;
+      if(title.length>6){
+        title=title.substring(0,6)+"...";
+      }
+      var temp={
+        title:title,
+        average: subject.rating.average,
+        movieId: subject.id,
+        coverageUrl: subject.images.large,
+        genres: subject.genres,//类型
+        actors: subject.casts,//演员
+        count: subject.collect_count
+
+      }
+      movies.push(temp)
+    }
+
+    var readyData = {};
+    readyData[settedKey] = {
+      categoryTitle: categoryTitle,
+      movies: movies
+    }
+    vm.setData({
+      readyData: readyData,
+       movies: movies
+      });
+    console.log(readyData)
+    wx.hideNavigationBarLoading();
+    
+
+  },
+
+//导航监听事件
+  navbarTap:function(e){
+    console.log(e);
+    var vm=this
+    if (e.target.dataset.idx == 1) {
+      console.log("电影")
+      wx.navigateTo({
+        url: '../movies/moviesSoon',
+      })
+
+    } else if (e.target.dataset.idx ==2){
+      wx.navigateTo({
+        url: '../movies/moviesTop250',
+      })
+    } else if (e.target.dataset.idx == 3){
+      wx.navigateTo({
+        url: '../movies/more/moreMovies',
+      })
+    }
+    vm.setData({
+      currentTab: e.currentTarget.dataset.idx
+    })
+    
+  },
+  // navbarTap: function (e) {
+  //   var vm = this
+  //   vm.setData({
+  //     currentTab: e.currentTarget.dataset.idx
+  //   })
+  //   console.log(vm.currentTab);
+  // }
 })
